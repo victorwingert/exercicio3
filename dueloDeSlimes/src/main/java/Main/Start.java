@@ -8,8 +8,9 @@ package Main;
  *
  * @author wingert
  */
-public class Console {
-    public void imprimir(){
+public class Start {
+
+    public void imprimir() {
         System.out.print("""
                         Bem-vindo ao jogo de slimes
 
