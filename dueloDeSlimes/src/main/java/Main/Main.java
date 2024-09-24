@@ -5,19 +5,12 @@ package Main;
 
 import java.util.Scanner;
 
-/**
- *
- * @author wingert
- */
 public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         Start ver = new Start();
-        Slime aSlime = new Slime();
-        Slime bSlime = new Slime();
-        Turn turn = new Turn(aSlime, bSlime);
 
         ver.imprimir();
 
@@ -31,8 +24,6 @@ public class Main {
                            -----------------------------------
                            INICIADO O JOGO
                            -----------------------------------""");
-        turn.runTurnA();
-        turn.runTurnB();
 
     }
 }

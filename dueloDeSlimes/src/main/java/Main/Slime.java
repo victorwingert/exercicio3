@@ -1,25 +1,19 @@
 package Main;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-/**
- *
- * @author wingert
- */
-public class Slime {
+public abstract class Slime {
 
     private double life;
     private double damageMultiplicator;
     private double resistence;
     private double energy;
+    private boolean energized;
 
     public Slime() {
         life = 10;
         damageMultiplicator = 1;
         resistence = 0;
         energy = 5;
+        energized = false;
     }
 
     public double getLife() {
@@ -54,4 +48,33 @@ public class Slime {
         this.energy = energy;
     }
 
+    public boolean isEnergized() {
+        return energized;
+    }
+
+    public void setEnergized(boolean energized) {
+        this.energized = energized;
+    }
+
+    public void ataque() {
+        if(energy < 1) {
+            System.out.println("Energia insuficiente !");
+        }
+        
+        if(energized == true) {
+            double damage = damageMultiplicator-resistence+0.5;
+        } else {
+            double damage = damageMultiplicator-resistence+0;
+        }
+    }
+    
+    public void energizar() {
+        if(energy < 2) {
+            System.out.println("Energia insuficiente !");
+        }
+        
+        energized = true;
+    }
+    
+    public abstract void especial(Slime defenderSlime);
 }
