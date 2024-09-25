@@ -10,14 +10,12 @@ public class SlimeDragon extends Slime {
     @Override
     public void especial(Slime defenderSlime) {
         if (getEnergy() < 4) {
-            System.out.println("Energia insuficiente para usar o especial!");
             return;
         }
 
         setDamageMultiplicator(getDamageMultiplicator() + 0.2);
+        setNoDamage(true);
         setEnergy(getEnergy() - 4);
-
-        //System.out.println("O Slime Dragão aumentou seu multiplicador de dano em 0.2 e está invulnerável por este turno!");
     }
 
     @Override

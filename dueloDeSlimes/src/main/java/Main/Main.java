@@ -28,12 +28,9 @@ public class Main {
         
         while(true) {
             turn.runTurnA();
-            if (turn.checkGameOver()) break;
             
             turn.runTurnB();
-            if (turn.checkGameOver()) break;
         }
 
-        System.out.println("Fim do jogo!");
     }
 }

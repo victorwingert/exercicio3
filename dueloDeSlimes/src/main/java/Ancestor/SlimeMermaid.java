@@ -10,14 +10,11 @@ public class SlimeMermaid extends Slime {
     @Override
     public void especial(Slime defenderSlime) {
         if (getEnergy() < 6) {
-            System.out.println("Energia insuficiente para usar o especial!");
             return;
         }
 
         setEnergy(2);
         defenderSlime.setEnergy(0);
-
-        //System.out.println("O Slime Sereia zerou a energia do alvo e ficou com 2 de energia!");
     }
 
     @Override

@@ -5,6 +5,7 @@
 //
 package Main;
 
+import Ancestor.SlimeDragon;
 import java.util.Scanner;
 
 public class Turn {
@@ -69,7 +70,13 @@ public class Turn {
             if (checkGameOver()) {
                 System.exit(0);
             }
+
         }
+        bSlime.setNoDamage(false);
+        if (aSlime instanceof SlimeDragon) {
+            aSlime.setDamageMultiplicator(1);
+        }
+        aSlime.setEnergized(false);
     }
 
     public void runTurnB() {
@@ -123,6 +130,12 @@ public class Turn {
                 System.exit(0);
             }
         }
+
+        aSlime.setNoDamage(false);
+        if (bSlime instanceof SlimeDragon) {
+            bSlime.setDamageMultiplicator(1);
+        }
+        bSlime.setEnergized(false);
     }
 
     public boolean checkGameOver() {

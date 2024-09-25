@@ -7,6 +7,7 @@ public abstract class Slime {
     private double resistence;
     private double energy;
     private boolean energized;
+    private boolean noDamage;
 
     public Slime() {
         life = 10;
@@ -14,6 +15,7 @@ public abstract class Slime {
         resistence = 0;
         energy = 5;
         energized = false;
+        noDamage = false;
     }
 
     public double getLife() {
@@ -56,13 +58,21 @@ public abstract class Slime {
         this.energized = energized;
     }
 
-    public void terminarTurno() {
+    public boolean isNoDamage() {
+        return noDamage;
+    }
 
+    public void setNoDamage(boolean noDamage) {
+        this.noDamage = noDamage;
     }
 
     public void ataque(Slime alvo) {
         if (energy < 1) {
             System.out.println("Energia insuficiente !");
+            return;
+        }
+        
+        if (alvo.noDamage) {
             return;
         }
 
@@ -71,8 +81,6 @@ public abstract class Slime {
         alvo.setLife(alvo.getLife() - dano);
 
         energy -= 1;
-
-        energized = false;
     }
 
     public void energizar() {
