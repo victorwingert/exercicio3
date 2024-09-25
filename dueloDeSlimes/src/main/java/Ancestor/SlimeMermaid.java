@@ -4,9 +4,24 @@ import Main.Slime;
 
 public class SlimeMermaid extends Slime {
 
+    public SlimeMermaid() {
+    }
+
     @Override
     public void especial(Slime defenderSlime) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (getEnergy() < 6) {
+            System.out.println("Energia insuficiente para usar o especial!");
+            return;
+        }
+
+        setEnergy(2);
+        defenderSlime.setEnergy(0);
+
+        //System.out.println("O Slime Sereia zerou a energia do alvo e ficou com 2 de energia!");
     }
-    
+
+    @Override
+    public void habilidade() {
+        System.out.println("Fica com 2 de energia para zerar a energia do alvo (precisa de 6 de energia para usar)");
+    }
 }

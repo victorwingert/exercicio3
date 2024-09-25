@@ -56,25 +56,35 @@ public abstract class Slime {
         this.energized = energized;
     }
 
-    public void ataque() {
-        if(energy < 1) {
-            System.out.println("Energia insuficiente !");
-        }
-        
-        if(energized == true) {
-            double damage = damageMultiplicator-resistence+0.5;
-        } else {
-            double damage = damageMultiplicator-resistence+0;
-        }
+    public void terminarTurno() {
+
     }
-    
+
+    public void ataque(Slime alvo) {
+        if (energy < 1) {
+            System.out.println("Energia insuficiente !");
+            return;
+        }
+
+        double dano = damageMultiplicator - alvo.getResistence() + (energized ? 0.5 : 0);
+
+        alvo.setLife(alvo.getLife() - dano);
+
+        energy -= 1;
+
+        energized = false;
+    }
+
     public void energizar() {
-        if(energy < 2) {
+        if (energy < 2) {
             System.out.println("Energia insuficiente !");
         }
-        
+
         energized = true;
+        energy -= 2;
     }
-    
+
     public abstract void especial(Slime defenderSlime);
+    
+    public abstract void habilidade();
 }

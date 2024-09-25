@@ -1,19 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// TODO
+//
+// 
+//
+//
 package Main;
 
 import java.util.Scanner;
 
-/**
- *
- * @author wingert
- */
 public class Turn {
 
     private Slime aSlime;
     private Slime bSlime;
+    private boolean isFirstTurnA = true;
+    private boolean isFirstTurnB = true;
 
     public Turn(Slime aSlime, Slime bSlime) {
         this.aSlime = aSlime;
@@ -22,6 +21,12 @@ public class Turn {
 
     public void runTurnA() {
 
+        if (!isFirstTurnA) {
+            aSlime.setEnergy(aSlime.getEnergy() + 2);
+        } else {
+            isFirstTurnA = false;
+        }
+
         System.out.println("""
                                -----------------------------------
                                TURNO DO SLIME A
@@ -29,17 +34,19 @@ public class Turn {
         int op = -1;
         Scanner sc = new Scanner(System.in);
 
-        while (op != 0) {
+        while (aSlime.getEnergy() > 0 && op != 0) {
             System.out.println();
             System.out.print("Vida atual dos slimes: ");
             System.out.println("A: " + aSlime.getLife() + " B: " + bSlime.getLife());
-            System.out.println("""
-                                   Digite a habilidade para o slime A usar: (energia restante: 5)
+            System.out.println("Digite a habilidade para o slime A usar: (energia restante: " + aSlime.getEnergy() + ")");
+            System.out.print("""
                                    0: Termina o turno
                                    1: Ataque
                                    2: Energizar
-                                   3: Especial: Ganha 20% de dano pelo resto do jogo
                                    """);
+            System.out.print("3: Especial: ");
+            aSlime.habilidade();
+            System.out.println();
 
             op = sc.nextInt();
 
@@ -47,21 +54,31 @@ public class Turn {
                 case 0:
                     return;
                 case 1:
-                    // FAZER ATAQUE;
+                    aSlime.ataque(bSlime);
                     break;
                 case 2:
-                    // SUBIR ENERGIA;
+                    aSlime.energizar();
                     break;
                 case 3:
-                    // ESPECIAL;
+                    aSlime.especial(bSlime);
                     break;
                 default:
-                    break;
+                    System.out.println("Ação inválida! Tente novamente.");
+            }
+
+            if (checkGameOver()) {
+                System.exit(0);
             }
         }
     }
 
     public void runTurnB() {
+
+        if (!isFirstTurnB) {
+            bSlime.setEnergy(bSlime.getEnergy() + 2);
+        } else {
+            isFirstTurnB = false;
+        }
 
         System.out.println("""
                                -----------------------------------
@@ -70,36 +87,61 @@ public class Turn {
         int op = -1;
         Scanner sc = new Scanner(System.in);
 
-        while (op != 0) {
+        while (bSlime.getEnergy() > 0 && op != 0) {
             System.out.println();
             System.out.print("Vida atual dos slimes: ");
             System.out.println("A: " + aSlime.getLife() + " B: " + bSlime.getLife());
-            System.out.println("""
-                                   Digite a habilidade para o slime B usar: (energia restante: 5)
+            System.out.println("Digite a habilidade para o slime A usar: (energia restante: " + bSlime.getEnergy() + ")");
+            System.out.print("""
                                    0: Termina o turno
                                    1: Ataque
                                    2: Energizar
-                                   3: Especial: Ganha 20% de dano pelo resto do jogo
                                    """);
+            System.out.print("3: Especial: ");
+            bSlime.habilidade();
+            System.out.println();
 
             op = sc.nextInt();
 
             switch (op) {
                 case 0:
-                    return;
+                    break;
                 case 1:
-                    // FAZER ATAQUE;
+                    bSlime.ataque(aSlime);
                     break;
                 case 2:
-                    // SUBIR ENERGIA;
+                    bSlime.energizar();
                     break;
                 case 3:
-                    // ESPECIAL;
+                    bSlime.especial(aSlime);
                     break;
                 default:
-                    break;
+                    System.out.println("Ação inválida! Tente novamente.");
+            }
+
+            if (checkGameOver()) {
+                System.exit(0);
             }
         }
     }
 
+    public boolean checkGameOver() {
+        if (aSlime.getLife() <= 0) {
+            System.out.println("""
+                               -----------------------------------
+                               Slime B venceu
+                               -----------------------------------
+                               """);
+            return true;
+        }
+        if (bSlime.getLife() <= 0) {
+            System.out.println("""
+                               -----------------------------------
+                               Slime A venceu
+                               -----------------------------------
+                               """);
+            return true;
+        }
+        return false;
+    }
 }

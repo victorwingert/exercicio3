@@ -1,6 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 package Main;
 
 import java.util.Scanner;
@@ -16,14 +13,27 @@ public class Main {
 
         System.out.println("Escolha o ancestral do slime A:");
         int aSlimeAncestor = sc.nextInt();
+        Slime aSlime = SlimeFactory.criarSlime(aSlimeAncestor);
         System.out.println();
         System.out.println("Escolha o ancestral do slime B:");
         int bSlimeAncestor = sc.nextInt();
+        Slime bSlime = SlimeFactory.criarSlime(bSlimeAncestor);
         System.out.println("""
                            
                            -----------------------------------
                            INICIADO O JOGO
                            -----------------------------------""");
+        
+        Turn turn = new Turn(aSlime, bSlime);
+        
+        while(true) {
+            turn.runTurnA();
+            if (turn.checkGameOver()) break;
+            
+            turn.runTurnB();
+            if (turn.checkGameOver()) break;
+        }
 
+        System.out.println("Fim do jogo!");
     }
 }

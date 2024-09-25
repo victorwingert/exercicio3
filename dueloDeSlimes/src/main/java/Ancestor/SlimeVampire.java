@@ -4,9 +4,25 @@ import Main.Slime;
 
 public class SlimeVampire extends Slime {
 
-    @Override
-    public void especial(Slime defenderSlime) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public SlimeVampire() {
     }
     
+    @Override
+    public void especial(Slime defenderSlime) {
+        if (getEnergy() < 4) {
+            System.out.println("Energia insuficiente para usar o especial!");
+            return;
+        }
+
+        defenderSlime.setLife(defenderSlime.getLife() - 2);
+        setLife(getLife() + 1);
+        setEnergy(getEnergy() - 4);
+
+        //System.out.println("O Slime Vampiro causou 2 de dano e recuperou 1 de vida!");
+    }
+
+    @Override
+    public void habilidade() {
+        System.out.println("Causa 2 de dano e recupera 1 de vida");
+    }
 }
