@@ -53,7 +53,8 @@ public class Turn {
 
             switch (op) {
                 case 0:
-                    return;
+                    op = 0;
+                    break;
                 case 1:
                     aSlime.ataque(bSlime);
                     break;
@@ -112,6 +113,7 @@ public class Turn {
 
             switch (op) {
                 case 0:
+                    op = 0;
                     break;
                 case 1:
                     bSlime.ataque(aSlime);

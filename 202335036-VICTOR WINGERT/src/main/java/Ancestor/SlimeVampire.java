@@ -12,6 +12,10 @@ public class SlimeVampire extends Slime {
         if (getEnergy() < 4) {
             return;
         }
+        
+        if (defenderSlime.isNoDamage()) {
+            return;
+        }
 
         defenderSlime.setLife(defenderSlime.getLife() - 2);
         setLife(getLife() + 1);
